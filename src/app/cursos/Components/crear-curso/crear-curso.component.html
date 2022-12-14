@@ -1,0 +1,94 @@
+<h2>Crear Curso</h2>
+
+<div class="row">
+  <div class="col">
+    <div *ngIf="dataSuccess" class="alert alert-success my-3 msj success" role="alert">
+      Has creado el curso con exito
+    </div>
+
+    <div class="p-3 border rounded-3 border-secondary crearCursoForm">
+      <div mat-dialog-content>
+        <form [formGroup]="formCurso" class="example-form">
+          <div class="row">
+            <div class="col">
+              <p>
+                <mat-form-field class="example-full-width " appearance="fill">
+                  <mat-label>Profesor</mat-label>
+                  <input
+                    [ngClass]="{'form-control': true, 'is-invalid': formCurso.get('profesor')?.errors && formCurso.get('profesor')?.touched}"
+                    matInput formControlName="profesor" placeholder="Ingrese un nombre">
+                  <div class="invalid-feedback">
+                    <small *ngIf="formCurso.get('profesor')?.errors?.['required'] && formCurso.get('profesor')?.touched">El
+                      campo es requerido</small>
+                  </div>
+                </mat-form-field>
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Nombre</mat-label>
+                  <input
+                    [ngClass]="{'form-control': true, 'is-invalid': formCurso.get('nombre')?.errors && formCurso.get('nombre')?.touched}"
+                    matInput formControlName="nombre" placeholder="Ingrese un nombre">
+                  <div class="invalid-feedback">
+                    <small *ngIf="formCurso.get('nombre')?.errors?.['required'] && formCurso.get('nombre')?.touched">El
+                      campo es requerido</small>
+                  </div>
+                </mat-form-field>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Inicia</mat-label>
+                  <input type="date"
+                    [ngClass]="{'form-control': true, 'is-invalid': formCurso.get('inicia')?.errors && formCurso.get('inicia')?.touched}"
+                    matInput formControlName="inicia" placeholder="Ingrese una fecha de inicio">
+                  <div class="invalid-feedback">
+                    <small *ngIf="formCurso.get('inicia')?.errors?.['required'] && formCurso.get('inicia')?.touched">El
+                      campo es requerido</small>
+                  </div>
+                </mat-form-field>
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <mat-label>Finaliza</mat-label>
+                  <input [ngClass]="{'form-control': true, 'is-invalid': formCurso.get('finaliza')?.errors && formCurso.get('finaliza')?.touched}"
+                  type="date" matInput formControlName="finaliza" placeholder="Ingrese una fecha de fin">
+                  <div class="invalid-feedback">
+                    <small *ngIf="formCurso.get('finaliza')?.errors?.['required'] && formCurso.get('finaliza')?.touched">El
+                      campo es requerido</small>
+                  </div>
+                </mat-form-field>
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <p>
+                <mat-slide-toggle formControlName="inscripcion">Abrir inscripciones</mat-slide-toggle>
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <label class="form-label">Elige una imagen</label>
+                <input class="form-control form-control-sm" type="file" (change)="subirImg($event)">
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="crearCurso()" [disabled]="!formCurso.valid">Crear Curso</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

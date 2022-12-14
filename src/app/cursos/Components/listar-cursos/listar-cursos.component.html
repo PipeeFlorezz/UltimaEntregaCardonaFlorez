@@ -1,0 +1,49 @@
+<div class="col cursos">
+      <div *ngIf="cursoEliminado" class="alert alert-success my-3 success" role="alert">
+        Has eliminado el curso con exito
+      </div>
+      <div *ngIf="sppiner" class="spppiner my-3">
+        <mat-spinner></mat-spinner>
+      </div>
+    <ul *ngIf="cursos && cursos.length >= 1 ">
+        <li *ngFor="let curso of cursos">
+            <mat-card class="example-card">
+                <mat-card-header class="cursoTitle">
+                    <mat-card-title>Curso de {{curso.nombre}}</mat-card-title>
+                    <mat-card-subtitle>Profesor: {{curso.profesor}}</mat-card-subtitle>
+                </mat-card-header>
+                <div class="imgCurso border border-warning">
+                    <img *ngIf="curso.imagen.length == 0" src="https://res.cloudinary.com/dziadnwao/image/upload/v1670973791/curxo_xyaggv.jpg" alt="Photo of a Shiba Inu">
+                    <img *ngIf="curso.imagen && curso.imagen.length >= 1" [src]="curso.imagen" alt="Photo of a Shiba Inu">
+                </div>
+                <mat-card-content>
+                    <div class="d-flex flex-column editarEliminar">
+                        <p class="mt-3 d-flex flex-column infoCursos">
+                            <span>Estudiantes: {{curso.estudiantes.length}}</span>
+                            <span>Inicia: {{curso.inicia | date}}</span>
+                            <span>Finaliza: {{curso.finaliza | date}}</span>
+                            <span>Inscripción: {{curso.inscripcion | booleanTexto: 'Inscripcion abierta': 'Inscripcion cerrada'}}</span>
+                        </p>
+                        <mat-card-actions class="firstmca" *ngIf="admin">
+                            <button mat-button (click)="editarCurso(curso)"><span>Editar</span>
+                                <mat-icon class="mat-18 iconUpdate me-4">updated</mat-icon>
+                            </button>
+                            <button mat-button (click)="eliminarCurso(curso)"><span>Eliminar</span>
+                                <mat-icon class="mat-18 iconDelete">delete</mat-icon>
+                            </button>
+                        </mat-card-actions>
+
+                    </div>
+                </mat-card-content>
+                <mat-card-actions class="d-grid mb-1">
+                    <button (click)="cursoPerfil(curso)" mat-button [ngClass]="{
+                            insccripcionAbierta: curso.inscripcion == true,
+                            insccripcionCerrada: curso.inscripcion == false
+                        }" [disabled]="!curso.inscripcion">
+                        {{curso.inscripcion | booleanTexto: 'Inscripcion abierta': 'Inscripcion cerrada'}}</button>
+                </mat-card-actions>
+            </mat-card>
+        </li>
+
+    </ul>
+</div>

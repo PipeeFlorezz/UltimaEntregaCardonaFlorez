@@ -1,0 +1,14 @@
+<div class="d-flex  align-items-center mb-2">
+    <h2 class="text-white">Lista de Alumnos</h2>
+    <button *ngIf="admin" mat-raised-button (click)="crearAlumno()" 
+    class="btn btn-primary btn-sm botonCrearAlumno">
+    Crear nuevo alumno</button>
+    
+</div>
+<div *ngIf="alumnos && alumnos.length == 0" class="alert alert-info msj">
+    No hay estudiantes, Si eres administrador puedes crear e inscibir un estudiante a algun curso, 
+    si eres usuario normal puedes inscrbirte tu mismo.
+  </div>
+<div>
+    <router-outlet></router-outlet>   
+</div>

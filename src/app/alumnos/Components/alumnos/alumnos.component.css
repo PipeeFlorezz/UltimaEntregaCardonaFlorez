@@ -1,0 +1,27 @@
+.iconDelete {
+    cursor: pointer;
+    color: red;
+}
+.iconUpdate {
+    cursor: pointer;
+    color: rgb(121, 121, 3);
+}
+
+.crear {
+    padding-top: -15px;
+    color: blue;
+}
+
+.botonCrearAlumno {
+    margin-left: auto;
+    padding-top: -5px !important;
+}
+
+.listaAlumnos {
+    margin-bottom: 20px;
+}
+
+.msj {
+    background-color: rgb(75 74 74 / 96%);
+    color: white;
+}

@@ -1,0 +1,285 @@
+<div class="acceder">
+  <div class="container mt-5">
+    <div *ngIf="dataSuccess" class="alert alert-success mb-2 success text-center" role="alert">
+      Has ingresado con exito
+    </div>
+    <div *ngIf="yaExiste" class="alert alert-success mb-2 success text-center" role="alert">
+      Este usuario ya existe, ingresa con otro email diferente.
+    </div>
+    <div class="text-white intro text-center">
+      <h1>Bienvenido al projecto final de Angular en Coder House</h1>
+    </div>
+  </div>
+  <div class="maquetacion">
+    
+      <div class="Form" *ngIf="primerForm">
+        <div mat-dialog-content class="usuario">
+          <form [formGroup]="elegirUsuario" class="usuario">
+            <div class="row">
+              <div class="col">
+                <div class="input-group mb-3">
+                  <mat-form-field appearance="fill" class="usuario">
+                    <label for="sexo" class="form-label">Eligir un tipo de usuario</label>
+                    <mat-select formControlName="usuario"
+                      [ngClass]="{'form-control': true, 'is-invalid': elegirUsuario.get('usuario')?.errors && elegirUsuario.get('usuario')?.touched}">
+                      <mat-option *ngFor="let usuario of Usuarios" [value]="usuario.viewValue">
+                        {{usuario.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                    <div class="invalid-feedback">
+                      <small
+                        *ngIf="elegirUsuario.get('usuario')?.errors?.['required'] && elegirUsuario.get('usuario')?.touched">El
+                        campo es requerido</small>
+                    </div>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div mat-dialog-actions>
+            <div class="mb-3 d-grid">
+              <button type="submit" (click)="formUsuario(elegirUsuario)" class="btn btn-primary"
+                [disabled]="!elegirUsuario.valid">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div>
+        <div *ngIf="Admin" class="Form">
+          <div mat-dialog-content class="usuario">
+            <form [formGroup]="formAdmin" class="usuario">
+              <div class="row">
+                <div class="col-12">
+                  <label for="nombre" class="form-label">Administrador</label>
+                  <div class="input-group mb-3">
+                    <input type="text"
+                      [ngClass]="{'form-control': true, 'is-invalid': formAdmin.get('nombre')?.errors && formAdmin.get('nombre')?.touched}"
+                      formControlName="nombre" placeholder="Ingresa un nombre unico de administrador">
+                    <div class="invalid-feedback">
+                      <small
+                        *ngIf="formAdmin.get('nombre')?.errors?.['required'] && formAdmin.get('nombre')?.touched">El
+                        campo es requerido</small>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <label for="clave" class="form-label">Contraseña</label>
+                  <div class="input-group mb-3">
+                    <input type="password"
+                      [ngClass]="{'form-control': true, 'is-invalid': formAdmin.get('clave')?.errors && formAdmin.get('clave')?.touched}"
+                      formControlName="clave" placeholder="Ingresa una contraseña">
+                    <div class="invalid-feedback">
+                      <small *ngIf="formAdmin.get('clave')?.errors?.['required'] && formAdmin.get('clave')?.touched">El
+                        campo es requerido</small>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              
+                              <div class="form-text text-center">Formulario exclusivo para registrarse como administrador</div>
+              <p class="text-center">
+                 ¿ No estas seguro de ingresar como administrador ? 
+                 <span style="cursor: pointer;" (click)="regresar(formAdmin)"
+                  class="text-secondary"> Regresar </span></p>
+              
+            </form>
+            <div mat-dialog-actions>
+              <div class="mb-3 d-grid">
+                <button type="submit" (click)="adminForm()" class="btn btn-primary"
+                  [disabled]="!formAdmin.valid">Enviar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="Alumno">
+          <div *ngIf="Registro" class="Form">
+            <div mat-dialog-content class="usuario">
+              <form [formGroup]="formRegistro" class="usuario">
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-group mb-3">
+                      <input
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('email')?.errors && formRegistro.get('email')?.touched}"
+                        formControlName="email" placeholder="Ingrese su email">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="formRegistro.get('email')?.errors?.['required'] && formRegistro.get('email')?.touched">El
+                          campo es requerido</small>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <label for="name" class="form-label">Nombre</label>
+                    <div class="input-group mb-3">
+                      <input type="text"
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('nombre')?.errors && formRegistro.get('nombre')?.touched}"
+                        formControlName="nombre" placeholder="nombre">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="formRegistro.get('nombre')?.errors?.['required'] && formRegistro.get('nombre')?.touched">El
+                          campo es requerido</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <div class="input-group mb-3">
+                      <input type="text"
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('apellido')?.errors && formRegistro.get('apellido')?.touched}"
+                        formControlName="apellido" placeholder="Apellido">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="formRegistro.get('apellido')?.errors?.['required'] && formRegistro.get('apellido')?.touched">El
+                          campo es requerido</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-6">
+                    <label for="edad" class="form-label">Edad</label>
+                    <div class="input-group mb-3">
+                      <input type="text"
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('edad')?.errors && formRegistro.get('edad')?.touched}"
+                        formControlName="edad" placeholder="Edad">
+                      <div class="invalid-feedback">
+                        <small *ngIf="formRegistro.get('edad')?.errors?.['min']">Los Alumnos deben tener una edad minima
+                          de 17 años</small>
+                        <small
+                          *ngIf="formRegistro.get('edad')?.errors?.['required'] && formRegistro.get('edad')?.touched">El
+                          campo es requerido</small>
+                        <small
+                          *ngIf="formRegistro.get('edad')?.errors?.['failAge'] && formRegistro.get('edad')?.touched">
+                          La edad debe de ser por obligacion un numero</small>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-6">
+                    <label for="pais" class="form-label">Pais</label>
+                    <div class="input-group mb-3">
+                      <input type="text"
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('pais')?.errors && formRegistro.get('pais')?.touched}"
+                        formControlName="pais" placeholder="Pais">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="formRegistro.get('pais')?.errors?.['required'] && formRegistro.get('pais')?.touched">El
+                          campo es requerido</small>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-sm-6">
+                    <label for="clave" class="form-label">Contraseña</label>
+                    <div class="input-group mb-3">
+                      <input type="password"
+                        [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('clave')?.errors && formRegistro.get('clave')?.touched}"
+                        formControlName="clave" placeholder="Contraseña">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="formRegistro.get('clave')?.errors?.['required'] && formRegistro.get('clave')?.touched">El
+                          campo es requerido</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="input-group">
+                      <mat-form-field appearance="fill" class="genero">
+                        <label for="sexo" class="form-label">sexo</label>
+                        <mat-select formControlName="sexo"
+                          [ngClass]="{'form-control': true, 'is-invalid': formRegistro.get('sexo')?.errors && formRegistro.get('sexo')?.touched}">
+                          <mat-option *ngFor="let genero of Generos" [value]="genero.viewValue">
+                            {{genero.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                        <div class="invalid-feedback">
+                          <small
+                            *ngIf="formRegistro.get('sexo')?.errors?.['required'] && formRegistro.get('sexo')?.touched">El
+                            campo es requerido</small>
+                        </div>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">Formulario exclusivo para registrarse, <span style="cursor: pointer;" (click)="regresar(formRegistro)"
+                  class="text-secondary"> haz click aquí si deseas cambiar de usuario </span></div>
+                <p class="text-center"> ¿ Ya te has registrado ? <span style="cursor: pointer;" (click)="loguearme(formRegistro)"
+                    class="text-secondary"> Loguearme </span></p>
+              </form>
+              <div mat-dialog-actions>
+                <div class="mb-3 d-grid">
+                  <button type="submit" (click)="RegistroForm(formRegistro)" class="btn btn-primary"
+                    [disabled]="!formRegistro.valid">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div *ngIf="Login" class="Form">
+            <div mat-dialog-content class="usuario">
+              <form [formGroup]="loginForm" class="usuario">
+                <div class="row">
+                  <div class="col-12">
+                    <label for="nombre" class="form-label">Alumno</label>
+                    <div class="input-group mb-3">
+                      <input type="text"
+                        [ngClass]="{'form-control': true, 'is-invalid': loginForm.get('email')?.errors && loginForm.get('email')?.touched}"
+                        formControlName="email" placeholder="ejemploalumno@hotmail.com">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">El
+                          campo es requerido</small>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <label for="clave" class="form-label">Contraseña</label>
+                    <div class="input-group mb-3">
+                      <input type="password"
+                        [ngClass]="{'form-control': true, 'is-invalid': loginForm.get('clave')?.errors && loginForm.get('clave')?.touched}"
+                        formControlName="clave" placeholder="Ingresa una contraseña">
+                      <div class="invalid-feedback">
+                        <small
+                          *ngIf="loginForm.get('clave')?.errors?.['required'] && loginForm.get('clave')?.touched">El
+                          campo es requerido</small>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">Formulario exclusivo para Login, <span style="cursor: pointer;" (click)="regresar(formRegistro)"
+                  class="text-secondary"> haz click aquí si deseas cambiar de usuario </span></div>
+                <p class="text-center"> ¿ No te has registrado ? <span style="cursor: pointer;" (click)="registrarme(loginForm)"
+                    class="text-secondary"> Registrarme </span></p>
+              </form>
+              <div mat-dialog-actions>
+                <div class="mb-3 d-grid">
+                  <button type="submit" (click)="loguearAlumno()" class="btn btn-primary"
+                    [disabled]="!loginForm.valid">Enviar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<h1 mat-dialog-title>Inscripcion</h1>
+<div mat-dialog-content>
+
+  <form [formGroup]="formAlumno">
+    <div class="row">
+        <div class="col">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group mb-3">
+                <input
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('email')?.errors && formAlumno.get('email')?.touched}"
+                    formControlName="email" placeholder="Ingrese su email">
+                <div class="invalid-feedback">
+                    <small
+                        *ngIf="formAlumno.get('email')?.errors?.['required'] && formAlumno.get('email')?.touched">El
+                        campo es requerido</small>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="name" class="form-label">Nombre</label>
+            <div class="input-group mb-3">
+                <input type="text"
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('nombre')?.errors && formAlumno.get('nombre')?.touched}"
+                    formControlName="nombre" placeholder="nombre">
+                <div class="invalid-feedback">
+                    <small
+                        *ngIf="formAlumno.get('nombre')?.errors?.['required'] && formAlumno.get('nombre')?.touched">El
+                        campo es requerido</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="apellido" class="form-label">Apellido</label>
+            <div class="input-group mb-3">
+                <input type="text"
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('apellido')?.errors && formAlumno.get('apellido')?.touched}"
+                    formControlName="apellido" placeholder="Apellido">
+                <div class="invalid-feedback">
+                    <small
+                        *ngIf="formAlumno.get('apellido')?.errors?.['required'] && formAlumno.get('apellido')?.touched">El
+                        campo es requerido</small>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <label for="edad" class="form-label">Edad</label>
+            <div class="input-group mb-3">
+                <input type="text"
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('edad')?.errors && formAlumno.get('edad')?.touched}"
+                    formControlName="edad" placeholder="Edad">
+                <div class="invalid-feedback">
+                    <small *ngIf="formAlumno.get('edad')?.errors?.['min']">Los Alumnos deben tener una edad minima
+                        de 17 años</small>
+                    <small
+                        *ngIf="formAlumno.get('edad')?.errors?.['required'] && formAlumno.get('edad')?.touched">El
+                        campo es requerido</small>
+                    <small *ngIf="formAlumno.get('edad')?.errors?.['failAge'] && formAlumno.get('edad')?.touched">
+                        La edad debe de ser por obligacion un numero</small>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <label for="pais" class="form-label">Pais</label>
+            <div class="input-group mb-3">
+                <input type="text"
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('pais')?.errors && formAlumno.get('pais')?.touched}"
+                    formControlName="pais" placeholder="Pais">
+                <div class="invalid-feedback">
+                    <small
+                        *ngIf="formAlumno.get('pais')?.errors?.['required'] && formAlumno.get('pais')?.touched">El
+                        campo es requerido</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <label for="clave" class="form-label">Contraseña</label>
+            <div class="input-group mb-3">
+                <input type="password"
+                    [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('clave')?.errors && formAlumno.get('clave')?.touched}"
+                    formControlName="clave" placeholder="Contraseña">
+                <div class="invalid-feedback">
+                    <small
+                        *ngIf="formAlumno.get('clave')?.errors?.['required'] && formAlumno.get('clave')?.touched">El
+                        campo es requerido</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-3">
+                <mat-form-field appearance="fill" class="genero">
+                    <label for="sexo" class="form-label">sexo</label>
+                    <mat-select formControlName="sexo"
+                        [ngClass]="{'form-control': true, 'is-invalid': formAlumno.get('sexo')?.errors && formAlumno.get('sexo')?.touched}">
+                        <mat-option *ngFor="let genero of Generos" [value]="genero.viewValue">
+                            {{genero.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <div class="invalid-feedback">
+                        <small
+                            *ngIf="formAlumno.get('sexo')?.errors?.['required'] && formAlumno.get('sexo')?.touched">El
+                            campo es requerido</small>
+                    </div>
+                </mat-form-field>
+
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button  (click)="inscribirAlumno()" [disabled]="!formAlumno.valid">
+    <span *ngIf="admin">Inscribir estudiante</span>
+    <span *ngIf="alumno">Inscribirme</span>
+  </button>
+</div>

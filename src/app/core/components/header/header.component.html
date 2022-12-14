@@ -1,0 +1,18 @@
+<header class="header">
+    <div class="lateral">
+        <h2 class="text-uppercase text-center mt-2 mb-3 text-white"><b>Projecto Final</b></h2>
+        <nav>
+            <ul>   
+                <mat-icon class="mat-18 iconoUsuario">man</mat-icon>
+                <li *ngIf="admin">{{Admin.nombre}}</li>
+                <li *ngIf="alumno">{{Alumno.nombre}}</li>
+                <li><a (click)="alumnosRoute()">Alumnos</a></li>
+                <li><a (click)="cursosRoute()">Cursos</a></li>
+                <li (click)="desloguearse()">Salir</li>
+            </ul>
+        </nav>
+        <div class="img">
+            <img src="https://res.cloudinary.com/dziadnwao/image/upload/v1670962494/ch_ta1ipz.png" alt="imagenCoderHouse">
+        </div>
+    </div>
+</header>

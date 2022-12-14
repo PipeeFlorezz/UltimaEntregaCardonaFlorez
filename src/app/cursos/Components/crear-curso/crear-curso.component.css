@@ -1,0 +1,20 @@
+.crearCursoForm, .success {
+    background-color: #f3f9ff;
+    width: 100%;
+}
+.msj {
+    background-color: rgb(75 74 74 / 96%);
+    color: white;
+}
+
+@media screen and (min-width:768px) {
+    .crearCursoForm, .success {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .crearCursoForm, .success {
+        width: 60%;
+    }
+}

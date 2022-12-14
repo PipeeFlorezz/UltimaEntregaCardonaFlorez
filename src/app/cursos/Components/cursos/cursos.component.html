@@ -1,0 +1,13 @@
+<div class="d-flex  align-items-center mb-2">
+    <h2 class="text-white">Lista de Cursos</h2>
+    <button  mat-raised-button (click)="crearCurso()" *ngIf="Admin" 
+    class="btn btn-primary btn-sm botonCurso">Crear curso</button>
+</div>
+
+<div *ngIf="cursos && cursos.length == 0" class="alert alert-info msj">
+    No hay cursos existentes, si eres administrador puedes crear uno.
+</div>
+
+<div>
+        <router-outlet></router-outlet>   
+</div>
